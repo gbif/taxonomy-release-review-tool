@@ -5,6 +5,7 @@
 > This is intended as a shortlived project to test the validity of the backbone. We expect that a more fleshed out version of this will live in COL.
 
 As this has to read local files you have to serve it. E.g. with `npx serve build`.
+
 ----------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
