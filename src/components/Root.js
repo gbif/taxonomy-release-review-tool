@@ -37,6 +37,7 @@ class Root extends React.Component {
   loadfromUrl = url => {
     Papa.parse(url, {
       download: true,
+      skipEmptyLines: true,
       delimiter: "\t",
       header: true,
       dynamicTyping: true,
@@ -173,7 +174,7 @@ class Root extends React.Component {
       q,
       searchCol,
       dataSource: this.state.unfilteredData.filter(record => {
-        return record[`${currentPrefix}${searchCol}`].indexOf(q) > -1 || record[`${proposedPrefix}${searchCol}`].indexOf(q) > -1;
+        return (record[`${currentPrefix}${searchCol}`] || '').indexOf(q) > -1 || (record[`${proposedPrefix}${searchCol}`] || '').indexOf(q) > -1;
       })
     });
   }
