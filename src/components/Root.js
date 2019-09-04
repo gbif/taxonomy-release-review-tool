@@ -26,7 +26,8 @@ class Root extends React.Component {
     this.state = {
       csvUrl: customCsv || csvFallback,
       searchCol: 'scientificName',
-      pageSize: 20
+      pageSize: 20,
+      loading: true
     };
   }
 
@@ -145,6 +146,7 @@ class Root extends React.Component {
           columns,
           dataSource: result.data,
           unfilteredData: result.data,
+          loading: false
           // expandedRowColumns
         });
       },
@@ -205,10 +207,10 @@ class Root extends React.Component {
             </Row>
           </div>
 
-          {this.state.dataSource &&
             <div style={{overflow: 'auto', width: '100%'}}>
               <Table dataSource={this.state.dataSource} columns={this.state.columns}
                 bordered={true}
+                loading={this.state.loading}
                 scroll={{ x: 870 }}
                 pagination={{
                   pageSize: this.state.pageSize,
@@ -218,7 +220,6 @@ class Root extends React.Component {
                 rowKey="_key"
               />
             </div>
-          }
         </div>
       </React.Fragment>
     )
