@@ -5,13 +5,13 @@ import Papa from 'papaparse';
 const { Search } = Input;
 const { Option } = Select;
 
-const verbatimPrefix = 'Verbatim_';
-const currentPrefix = 'Current_';
-const proposedPrefix = 'Proposed_';
+const verbatimPrefix = 'verbatim_';
+const currentPrefix = 'current_';
+const proposedPrefix = 'proposed_';
 
-const ranksToCompare = ['kingdom', 'phylum', 'klass', 'order', 'family', 'genus', 'subGenus', 'species', 'scientificName'];
+const ranksToCompare = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'subGenus', 'species', 'scientificName'];
 const fieldsToCompare = ['acceptedScientificName', 'taxonKey'];
-const tableColumns = ['kingdom', 'phylum', 'klass', 'order', 'family', 'genus', 'subGenus', 'species', 'scientificName', 'acceptedScientificName'];
+const tableColumns = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'subGenus', 'species', 'scientificName', 'acceptedScientificName'];
 
 const url = '/diff.txt';
 
@@ -111,10 +111,10 @@ class Root extends React.Component {
         // add columns for counts, changes and actions
         columns = [
           {
-            title: 'Count',
-            key: 'Count',
-            dataIndex: 'Count',
-            sorter: (a, b) => a.Count - b.Count,
+            title: 'count',
+            key: 'count',
+            dataIndex: 'count',
+            sorter: (a, b) => a.count - b.count,
             sortDirections: ['descend', 'ascend'],
             render: text => Number(text).toLocaleString()
           }
