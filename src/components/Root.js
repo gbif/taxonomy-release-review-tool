@@ -13,14 +13,18 @@ const ranksToCompare = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus'
 const fieldsToCompare = ['acceptedScientificName', 'taxonKey'];
 const tableColumns = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'subGenus', 'species', 'scientificName', 'acceptedScientificName'];
 
-const url = '/diff.txt';
+const csvFallback = '/diff.txt';
+
+var url_string = window.location.href
+var url = new URL(url_string);
+var customCsv = url.searchParams.get("csv");
 
 class Root extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      csvUrl: url,
+      csvUrl: customCsv || csvFallback,
       searchCol: 'scientificName',
       pageSize: 20
     };
@@ -93,9 +97,6 @@ class Root extends React.Component {
             render: (text, record) => {
               const isDifferent = record[`${proposedPrefix}${rank}`] !== text;
               const smallDifference = isDifferent && record[`${proposedPrefix}${rank}`].toLowerCase().replace(/[()]/g, '') === text.toLowerCase().replace(/[()]/g, '');
-              if (text === 'Helophorus flavipes Fabricius, 1792') {
-                console.log(5);
-              }
               const perfectMatchChanged = record[`${verbatimPrefix}${rank}`] === text && isDifferent;
               const changedToPerfectMatch = record[`${verbatimPrefix}${rank}`] === record[`${proposedPrefix}${rank}`] && isDifferent;
               return <div className={`nowrap ${ isDifferent ? 'hasChanged' : 'isSame' } ${ smallDifference ? 'smallChange' : '' }`}>
