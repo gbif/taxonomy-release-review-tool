@@ -92,7 +92,7 @@ class Root extends React.Component {
             onFilter: (value, record) => !!record.changes[rank] === value,
             render: (text, record) => {
               const isDifferent = record[`${proposedPrefix}${rank}`] !== text;
-              return <div className={isDifferent ? 'hasChanged' : 'isSame'}>
+              return <div className={isDifferent ? 'nowrap hasChanged' : 'nowrap isSame'}>
                 <div>{text}</div>
                 <div>{record[`${proposedPrefix}${rank}`] !== text ? record[`${proposedPrefix}${rank}`] : '\u00A0'}</div>
               </div>;
@@ -115,7 +115,7 @@ class Root extends React.Component {
             title: 'Changes',
             key: 'changes',
             dataIndex: 'changes',
-            render: (val, record) => <React.Fragment>{Object.keys(val).map(f => <Tag color="red" key={f}>{f}</Tag>)}</React.Fragment>,
+            render: (val, record) => <React.Fragment>{Object.keys(val).map(f => <Tag key={f}>{f}</Tag>)}</React.Fragment>,
             filters: Object.keys(changeSummary).map(x => {
               return { text: x, value: x };
             }),

@@ -17,8 +17,12 @@ code {
 
 .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
   /* padding: 4px; */
+}
+
+.nowrap {
   white-space: nowrap;
 }
+
 td>.hasChanged {
   color: tomato;
   font-weight: 500;
