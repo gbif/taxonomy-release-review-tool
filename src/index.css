@@ -27,6 +27,30 @@ td>.hasChanged {
   color: tomato;
   font-weight: 500;
 }
+td>.hasChanged.smallChange {
+  color: orange;
+  font-weight: 500;
+}
 td>.isSame {
   color: #999;
+}
+
+td .perfectMatchChanged {
+  color: #fff;
+  background: tomato;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+td .changedToPerfectMatch {
+  color: #154808;
+  background: #75ce75;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+
+.ant-table-body {
+  height: calc(100vh - 150px);
 }

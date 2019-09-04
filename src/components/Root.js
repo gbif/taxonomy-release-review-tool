@@ -1,11 +1,11 @@
 import React from 'react';
-import { Select, Table, Tag, Input, Row, Col } from 'antd';
+import { Tooltip, Select, Table, Input, Row, Col } from 'antd';
 import Papa from 'papaparse';
 
 const { Search } = Input;
 const { Option } = Select;
 
-// const verbatimPrefix = 'Verbatim_';
+const verbatimPrefix = 'Verbatim_';
 const currentPrefix = 'Current_';
 const proposedPrefix = 'Proposed_';
 
@@ -92,9 +92,17 @@ class Root extends React.Component {
             onFilter: (value, record) => !!record.changes[rank] === value,
             render: (text, record) => {
               const isDifferent = record[`${proposedPrefix}${rank}`] !== text;
-              return <div className={isDifferent ? 'nowrap hasChanged' : 'nowrap isSame'}>
-                <div>{text}</div>
-                <div>{record[`${proposedPrefix}${rank}`] !== text ? record[`${proposedPrefix}${rank}`] : '\u00A0'}</div>
+              const smallDifference = isDifferent && record[`${proposedPrefix}${rank}`].toLowerCase().replace(/[()]/g, '') === text.toLowerCase().replace(/[()]/g, '');
+              if (text === 'Helophorus flavipes Fabricius, 1792') {
+                console.log(5);
+              }
+              const perfectMatchChanged = record[`${verbatimPrefix}${rank}`] === text && isDifferent;
+              const changedToPerfectMatch = record[`${verbatimPrefix}${rank}`] === record[`${proposedPrefix}${rank}`] && isDifferent;
+              return <div className={`nowrap ${ isDifferent ? 'hasChanged' : 'isSame' } ${ smallDifference ? 'smallChange' : '' }`}>
+                  <Tooltip title={`${isDifferent ? rank + ' has changed' : ''}${smallDifference ? ' (casing and/or parenthesis' : ''}${perfectMatchChanged ? ' - current equals verbatim' : ''}${changedToPerfectMatch ? ' - propsed equals verbatim' : ''}`}>
+                    <div className={ perfectMatchChanged ? 'perfectMatchChanged' : '' }>{text}</div>
+                    <div className={ changedToPerfectMatch? 'changedToPerfectMatch' : '' }>{record[`${proposedPrefix}${rank}`] !== text ? record[`${proposedPrefix}${rank}`] : '\u00A0'}</div>
+                </Tooltip>
               </div>;
             }
           }
@@ -115,7 +123,7 @@ class Root extends React.Component {
             title: 'Changes',
             key: 'changes',
             dataIndex: 'changes',
-            render: (val, record) => <React.Fragment>{Object.keys(val).map(f => <Tag key={f}>{f}</Tag>)}</React.Fragment>,
+            render: (val, record) => <React.Fragment>{Object.keys(val).map(f => <span key={f}>{f}, </span>)}</React.Fragment>,
             filters: Object.keys(changeSummary).map(x => {
               return { text: x, value: x };
             }),
