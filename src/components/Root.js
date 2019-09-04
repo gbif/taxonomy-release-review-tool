@@ -13,7 +13,7 @@ const ranksToCompare = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus'
 const fieldsToCompare = ['acceptedScientificName', 'taxonKey'];
 const tableColumns = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus', 'subGenus', 'species', 'scientificName', 'acceptedScientificName'];
 
-const csvFallback = '/diff.txt';
+const csvFallback = './diff.txt';
 
 var url_string = window.location.href
 var url = new URL(url_string);

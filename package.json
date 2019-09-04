@@ -34,5 +34,6 @@
     "http-server": "^0.11.1",
     "nodemon": "^1.18.10",
     "yargs": "^13.2.1"
-  }
+  },
+  "homepage": "."
 }
