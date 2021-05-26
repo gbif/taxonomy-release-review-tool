@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.26.19",
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.8.6",
+    "lodash": "^4.17.21",
     "papaparse": "^5.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
